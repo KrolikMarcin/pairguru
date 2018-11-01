@@ -15,6 +15,7 @@
 class Movie < ApplicationRecord
   belongs_to :genre
   has_many :comments, dependent: :destroy
+  validates_with TitleBracketsValidator
 
   def sort_comments
     comments.order(updated_at: :desc)
