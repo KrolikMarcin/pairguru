@@ -14,4 +14,9 @@
 
 class Movie < ApplicationRecord
   belongs_to :genre
+  has_many :comments, dependent: :destroy
+
+  def sort_comments
+    comments.order(updated_at: :desc)
+  end
 end

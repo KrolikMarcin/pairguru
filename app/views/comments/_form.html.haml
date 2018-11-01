@@ -1,0 +1,13 @@
+- if flash[:alert]
+  - flash[:alert].each do |msg|
+    .alert.alert-danger= msg
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      New comment
+  .panel-body
+    = form_for [movie, comment] do |f|
+      .form-group
+        = f.text_area :body, class: 'form-control'
+      .actions.pull-right
+        = f.submit 'Create', class: 'btn btn-default'
