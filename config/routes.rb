@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-
+  get "best_commenters", to: "users#best_commenters"
   root "home#welcome"
   resources :genres, only: :index do
     member do

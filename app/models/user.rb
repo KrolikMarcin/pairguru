@@ -24,4 +24,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :comments, dependent: :destroy
   validates :phone_number, format: { with: /\A[+]?\d+(?>[- .]\d+)*\z/, allow_nil: true }
+
+  def self.best_commenters
+    joins(:comments).select("users.id, users.name, count(comments.id) as count")
+      .where(comments: { created_at: (1.week.ago..Time.current) }).group(:id)
+      .order("count DESC").limit(10)
+  end
 end
